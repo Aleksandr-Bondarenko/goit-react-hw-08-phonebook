@@ -1,0 +1,21 @@
+.form {
+  width: 250px;
+  border: 1px dashed rgba(31, 111, 202, 0.781);
+  display: flex;
+  flex-direction: column;
+  padding: 15px 40px 15px 20px;
+}
+
+.input,
+.label,
+.btn {
+  align-self: flex-start;
+}
+
+.label:not(:first-child) {
+  margin-top: 20px;
+}
+
+.btn {
+  margin-top: 15px;
+}

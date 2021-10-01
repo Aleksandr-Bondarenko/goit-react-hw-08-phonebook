@@ -1,0 +1,15 @@
+.item {
+  display: flex;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.tel {
+  margin-left: 10px;
+}
+
+.btn {
+  margin-left: auto;
+}
