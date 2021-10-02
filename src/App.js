@@ -1,10 +1,20 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/Filter/Filter";
 import ContactsList from "./components/ContactsList/ContactsList.js";
 import "./App.css";
 
 class App extends Component {
+  static propTypes = {
+    filter: PropTypes.number,
+    onSubmitContactForm: PropTypes.func,
+    handleContactsFilter: PropTypes.func,
+    handleClickDelContact: PropTypes.func,
+    visibleContacts: PropTypes.func,
+    toDelContact: PropTypes.func,
+  };
+
   state = {
     contacts: [],
     filter: "",
@@ -40,19 +50,15 @@ class App extends Component {
   };
 
   toDelContact = (contactId) => {
-    // this.setState((prevState) => ({
-    //   contacts: prevState.contacts.filter((contact) => {
-    //     return contact.id !== contactId;
-    //   }),
-    // }));
-    this.setState({
-      contacts: this.state.contacts.filter((contact) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((contact) => {
         return contact.id !== contactId;
       }),
-    });
+    }));
   };
 
   render() {
+    const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
 
     return (
@@ -60,11 +66,8 @@ class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.onSubmitContactForm} />
         <h2 className="listTitle">Contacts</h2>
-        <Filter
-          onChange={this.handleContactsFilter}
-          value={this.state.filter}
-        />
-        {visibleContacts.length === 0 && this.state.filter.length > 0 ? (
+        <Filter onChange={this.handleContactsFilter} value={filter} />
+        {visibleContacts.length === 0 && filter.length > 0 ? (
           <p className="notifyText">No results for your search</p>
         ) : (
           <ContactsList

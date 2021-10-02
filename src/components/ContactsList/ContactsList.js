@@ -1,4 +1,5 @@
 import ContactItem from "../ContactItem/ContactItem";
+import PropTypes from "prop-types";
 import s from "./ContactsList.module.css";
 
 function ContactsList({ contacts, toDelContact }) {
@@ -18,3 +19,14 @@ function ContactsList({ contacts, toDelContact }) {
 }
 
 export default ContactsList;
+
+ContactsList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ),
+  toDelContact: PropTypes.func,
+};

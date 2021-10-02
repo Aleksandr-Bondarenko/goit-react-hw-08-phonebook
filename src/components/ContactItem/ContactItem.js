@@ -1,4 +1,5 @@
 import s from "./ContactItem.module.css";
+import PropTypes from "prop-types";
 
 function ContactItem({ id, name, number, toDelContact }) {
   return (
@@ -18,3 +19,10 @@ function ContactItem({ id, name, number, toDelContact }) {
 }
 
 export default ContactItem;
+
+ContactItem.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+  toDelContact: PropTypes.func,
+};

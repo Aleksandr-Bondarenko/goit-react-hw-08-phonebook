@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 import s from "./Filter.module.css";
 
 function Filter({ onChange, value }) {
   const filterInputId = uuidv4();
+
   return (
     <div className={s.filter}>
       <label className={s.label} htmlFor={filterInputId}>
@@ -13,7 +15,7 @@ function Filter({ onChange, value }) {
         type="text"
         name="filter"
         value={value}
-        id="filterInputId"
+        id={filterInputId}
         onChange={onChange}
       />
     </div>
@@ -21,3 +23,9 @@ function Filter({ onChange, value }) {
 }
 
 export default Filter;
+
+Filter.propTypes = {
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+  filterInputId: PropTypes.string,
+};
