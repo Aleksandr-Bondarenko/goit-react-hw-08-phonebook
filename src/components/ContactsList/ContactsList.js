@@ -21,12 +21,5 @@ function ContactsList({ contacts, toDelContact }) {
 export default ContactsList;
 
 ContactsList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
-  toDelContact: PropTypes.func,
+  contacts: PropTypes.array,
 };

@@ -1,20 +1,10 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/Filter/Filter";
 import ContactsList from "./components/ContactsList/ContactsList.js";
 import "./App.css";
 
 class App extends Component {
-  static propTypes = {
-    filter: PropTypes.number,
-    onSubmitContactForm: PropTypes.func,
-    handleContactsFilter: PropTypes.func,
-    handleClickDelContact: PropTypes.func,
-    visibleContacts: PropTypes.func,
-    toDelContact: PropTypes.func,
-  };
-
   state = {
     contacts: [],
     filter: "",
@@ -72,7 +62,6 @@ class App extends Component {
         ) : (
           <ContactsList
             contacts={visibleContacts}
-            onClick={this.handleClickDelContact}
             toDelContact={this.toDelContact}
           />
         )}

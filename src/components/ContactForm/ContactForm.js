@@ -5,12 +5,7 @@ import s from "./ContactForm.module.css";
 
 class ContactForm extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    number: PropTypes.string,
-    inputNameId: PropTypes.string,
-    inputNumberId: PropTypes.string,
-    handleAddContact: PropTypes.func,
-    handleInputChange: PropTypes.func,
+    onSubmit: PropTypes.func,
   };
 
   state = {

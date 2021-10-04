@@ -27,5 +27,4 @@ export default Filter;
 Filter.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
-  filterInputId: PropTypes.string,
 };
