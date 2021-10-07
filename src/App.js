@@ -16,6 +16,26 @@ class App extends Component {
     // ],
   };
 
+  getSavedContacts = () => {
+    if (localStorage.getItem("contacts") === null) {
+      localStorage.setItem("contacts", JSON.stringify([]));
+    }
+    return JSON.parse(localStorage.getItem("contacts"));
+  };
+
+  componentDidMount() {
+    console.log("ComponentDidMount-read contacts from LocalStorage");
+    console.log(this.getSavedContacts());
+    if (this.getSavedContacts()) {
+      this.setState({ contacts: this.getSavedContacts() });
+    }
+  }
+
+  componentDidUpdate() {
+    console.log("ComponentDidUpdate - rewrite LocalStorage");
+    localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+  }
+
   onSubmitContactForm = (data) => {
     if (this.state.contacts.find((contact) => contact.name === data.name)) {
       alert(`${data.name} is already in contacts.`);
@@ -57,8 +77,12 @@ class App extends Component {
         <ContactForm onSubmit={this.onSubmitContactForm} />
         <h2 className="listTitle">Contacts</h2>
         <Filter onChange={this.handleContactsFilter} value={filter} />
-        {visibleContacts.length === 0 && filter.length > 0 ? (
-          <p className="notifyText">No results for your search</p>
+        {visibleContacts.length === 0 ? (
+          <p className="notifyText">
+            {filter.length > 0
+              ? "No results for your search"
+              : "No contacts yet"}
+          </p>
         ) : (
           <ContactsList
             contacts={visibleContacts}
