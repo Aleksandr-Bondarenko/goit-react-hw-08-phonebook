@@ -1,5 +1,5 @@
-import s from "./ContactItem.module.css";
 import PropTypes from "prop-types";
+import s from "./ContactItem.module.css";
 
 function ContactItem({ id, name, number, toDelContact }) {
   return (

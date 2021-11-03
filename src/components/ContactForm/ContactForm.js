@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
+
+import * as actions from "../../redux/contacts/contacts-actions";
+import store from "../../redux/store";
+
 import s from "./ContactForm.module.css";
 
-function ContactForm({ onSubmit }) {
+function ContactForm({ toAddContact }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
@@ -30,28 +35,21 @@ function ContactForm({ onSubmit }) {
     }
   };
 
-  const handleAddContact = (e) => {
-    e.preventDefault();
-
-    const addedContact = {
-      id: uuidv4(),
-      name,
-      number,
-    };
-
-    onSubmit(addedContact);
-    resetForm();
-  };
-
   const resetForm = () => {
     setName("");
     setNumber("");
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toAddContact(name, number);
+    resetForm();
+  };
+
   return (
     <form
       className={s.form}
-      onSubmit={handleAddContact}
+      onSubmit={handleSubmit}
       name="adding_contacts_form"
     >
       <label className={s.label} htmlFor={nameId.current}>
@@ -91,8 +89,20 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-export default ContactForm;
+const mapDispatchToProps = (dispatch) => ({
+  toAddContact: (name, number) => {
+    store
+      .getState()
+      .contacts.items.find(
+        (item) => item.name.toLowerCase() === name.toLowerCase()
+      )
+      ? alert(`${name} is already in contacts.`)
+      : dispatch(actions.add(name, number));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
 
 ContactForm.propTypes = {
-  onSubmit: PropTypes.func,
+  toAddContact: PropTypes.func,
 };
