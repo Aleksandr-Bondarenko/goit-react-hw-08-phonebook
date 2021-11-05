@@ -1,13 +1,21 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/Filter/Filter";
 import ContactsList from "./components/ContactsList/ContactsList.js";
+import {
+  getItems,
+  getFilter,
+  getVisibleContacts,
+} from "./redux/contacts/contacts-selectors";
 import "./App.css";
 
-function App({ contacts }) {
+function App() {
+  const contacts = useSelector(getItems);
+  const visibleContacts = useSelector(getVisibleContacts);
+  const filter = useSelector(getFilter);
+
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
@@ -18,18 +26,15 @@ function App({ contacts }) {
       <ContactForm />
       <h2 className="listTitle">Contacts</h2>
       <Filter />
-      <ContactsList />
+      {visibleContacts.length === 0 ? (
+        <p className="notifyText">
+          {filter.length > 0 ? "No results for your search" : "No contacts yet"}
+        </p>
+      ) : (
+        <ContactsList />
+      )}
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts.items,
-  filter: state.contacts.filter,
-});
-
-export default connect(mapStateToProps)(App);
-
-App.propTypes = {
-  contacts: PropTypes.array,
-};
+export default App;

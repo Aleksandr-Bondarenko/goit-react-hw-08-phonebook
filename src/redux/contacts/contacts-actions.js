@@ -1,21 +1,34 @@
 import { v4 as uuidv4 } from "uuid";
-import actionTypes from "./contacts-types";
+import { createAction } from "@reduxjs/toolkit";
+// import actionTypes from "./contacts-types";
 
-export const add = (name, number) => ({
-  type: actionTypes.ADD,
+export const add = createAction("contacts/add", (name, number) => ({
   payload: {
     id: uuidv4(),
     name,
     number,
   },
-});
+}));
 
-export const del = (id) => ({
-  type: actionTypes.DEL,
-  payload: id,
-});
+export const del = createAction("contacts/delete");
+export const filter = createAction("contacts/filter");
 
-export const filter = (value) => ({
-  type: actionTypes.FILTER,
-  payload: value,
-});
+// Create actions with use Vanilla Redux (without Redux Toolkit)
+// export const add = (name, number) => ({
+//   type: actionTypes.ADD,
+//   payload: {
+//     id: uuidv4(),
+//     name,
+//     number,
+//   },
+// });
+
+// export const del = (id) => ({
+//   type: actionTypes.DEL,
+//   payload: id,
+// });
+
+// export const filter = (value) => ({
+//   type: actionTypes.FILTER,
+//   payload: value,
+// });

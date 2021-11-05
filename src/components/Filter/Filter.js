@@ -1,10 +1,13 @@
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
 import * as actions from "../../redux/contacts/contacts-actions";
+import { getFilter } from "../../redux/contacts/contacts-selectors";
 import s from "./Filter.module.css";
 
-function Filter({ onChange, value }) {
+function Filter() {
+  const value = useSelector(getFilter);
+  const dispatch = useDispatch();
+
   const filterInputId = uuidv4();
 
   return (
@@ -18,24 +21,13 @@ function Filter({ onChange, value }) {
         name="filter"
         value={value}
         id={filterInputId}
-        onChange={onChange}
+        onChange={(event) =>
+          dispatch(actions.filter(event.currentTarget.value))
+        }
         autoComplete="off"
       />
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  value: state.contacts.filter,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onChange: (event) => dispatch(actions.filter(event.currentTarget.value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
-
-Filter.propTypes = {
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-};
+export default Filter;

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://Aleksandr-Bondarenko.github.io/goit-react-hw-06-phonebook",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -50,7 +51,8 @@
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
     "prop-types": "^15.7.2",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
