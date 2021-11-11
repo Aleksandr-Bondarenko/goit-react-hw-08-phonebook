@@ -10,3 +10,12 @@
 .listTitle {
   margin-top: 25px;
 }
+
+.ContactsLoader {
+  margin: 50px auto;
+  color: #2b2626;
+}
+
+.Toaster {
+  border-radius: 20px;
+}

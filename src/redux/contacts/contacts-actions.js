@@ -1,34 +1,19 @@
-import { v4 as uuidv4 } from "uuid";
 import { createAction } from "@reduxjs/toolkit";
-// import actionTypes from "./contacts-types";
 
-export const add = createAction("contacts/add", (name, number) => ({
-  payload: {
-    id: uuidv4(),
-    name,
-    number,
-  },
-}));
+export const fetchContactsRequest = createAction(
+  "contacts/fetchContactsRequest"
+);
+export const fetchContactsSuccess = createAction(
+  "contacts/fetchContactsSuccess"
+);
+export const fetchContactsError = createAction("contacts/fetchContactsError");
 
-export const del = createAction("contacts/delete");
-export const filter = createAction("contacts/filter");
+export const addContactsRequest = createAction("contacts/addContactsRequest");
+export const addContactsSuccess = createAction("contacts/addContactsSuccess");
+export const addContactsError = createAction("contacts/addContactsError");
 
-// Create actions with use Vanilla Redux (without Redux Toolkit)
-// export const add = (name, number) => ({
-//   type: actionTypes.ADD,
-//   payload: {
-//     id: uuidv4(),
-//     name,
-//     number,
-//   },
-// });
+export const delContactsRequest = createAction("contacts/delContactsRequest");
+export const delContactsSuccess = createAction("contacts/delContactsSuccess");
+export const delContactsError = createAction("contacts/delContactsError");
 
-// export const del = (id) => ({
-//   type: actionTypes.DEL,
-//   payload: id,
-// });
-
-// export const filter = (value) => ({
-//   type: actionTypes.FILTER,
-//   payload: value,
-// });
+export const filterContacts = createAction("contacts/filter");

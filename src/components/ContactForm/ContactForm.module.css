@@ -16,6 +16,10 @@
   margin-top: 20px;
 }
 
-.btn {
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 15px;
+  width: 130px;
 }

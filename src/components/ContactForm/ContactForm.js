@@ -1,18 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import * as actions from "../../redux/contacts/contacts-actions";
-import { getItems } from "../../redux/contacts/contacts-selectors";
+import toast from "react-hot-toast";
+import Loader from "react-loading";
+import { addContact } from "../../redux/contacts/contacts-operations";
+import { getItems, getLoading } from "../../redux/contacts/contacts-selectors";
 import s from "./ContactForm.module.css";
 
 function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
+  const isLoading = useSelector(getLoading);
+  // const [isAddBtnLoading, setIsAddBtnLoading] = useState(isLoading);
+
   const nameId = useRef("");
   const numberId = useRef("");
 
   const currentContacts = useSelector(getItems);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +41,9 @@ function ContactForm() {
     }
   };
 
-  const toAddContact = (name, number) => dispatch(actions.add(name, number));
+  const toAddContact = (name, number) => {
+    dispatch(addContact(name, number));
+  };
 
   const resetForm = () => {
     setName("");
@@ -44,14 +52,16 @@ function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // setIsAddBtnLoading(!isLoading);
 
     if (currentContacts.find((contact) => contact.name === name)) {
-      alert(`${name} is already in contacts.`);
+      toast.error(`${name} is already in contacts.`);
       return;
     }
 
     toAddContact(name, number);
     resetForm();
+    // setTimeout(() => setIsAddBtnLoading(false), 20000);
   };
 
   return (
@@ -90,9 +100,20 @@ function ContactForm() {
         onChange={handleInputChange}
       />
 
-      <button className={s.btn} type="submit">
-        Add contact
-      </button>
+      <div className={s.box}>
+        <button className={s.btn} type="submit" disabled={isLoading}>
+          Add contact
+        </button>
+        {isLoading && (
+          <Loader
+            className={"s.loader"}
+            type={"spinningBubbles"}
+            color={"#2b2626"}
+            height={25}
+            width={25}
+          />
+        )}
+      </div>
     </form>
   );
 }

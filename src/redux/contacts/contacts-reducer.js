@@ -1,61 +1,55 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
-import * as actions from "./contacts-actions";
-// import { combineReducers } from "redux";
-// import actionTypes from "./contacts-types";
+import {
+  fetchContactsRequest,
+  fetchContactsSuccess,
+  fetchContactsError,
+  addContactsRequest,
+  addContactsSuccess,
+  addContactsError,
+  delContactsRequest,
+  delContactsSuccess,
+  delContactsError,
+  filterContacts,
+} from "./contacts-actions";
 
-// Option with use "Map Object Notation"
 const itemsReducer = createReducer([], {
-  [actions.add]: (state, action) => [action.payload, ...state],
-  [actions.del]: (state, action) =>
-    state.filter((item) => item.id !== action.payload),
+  [fetchContactsSuccess]: (_, { payload }) => payload.reverse(),
+  [addContactsSuccess]: (state, { payload }) => [payload, ...state],
+  [delContactsSuccess]: (state, { payload }) =>
+    state.filter((item) => item.id !== payload),
+});
+
+const loadingReducer = createReducer(false, {
+  [fetchContactsRequest]: () => true,
+  [fetchContactsSuccess]: () => false,
+  [fetchContactsError]: () => false,
+
+  [addContactsRequest]: () => true,
+  [addContactsSuccess]: () => false,
+  [addContactsError]: () => false,
+
+  [delContactsRequest]: () => true,
+  [delContactsSuccess]: () => false,
+  [delContactsError]: () => false,
+});
+
+const errorReducer = createReducer(null, {
+  [fetchContactsError]: (_, { payload }) => payload.message,
+
+  [addContactsError]: (_, { payload }) => payload.message,
+
+  [delContactsError]: (_, { payload }) => payload.message,
 });
 
 const filterReducer = createReducer("", {
-  [actions.filter]: (_, action) => action.payload,
+  [filterContacts]: (_, action) => action.payload,
 });
-
-// Option with use "Builder Callback Notation"
-
-// const itemsReducer = createReducer([], (builder) => {
-//   builder
-//     .addCase(actions.add, (state, action) => [action.payload, ...state])
-//     .addCase(actions.del, (state, action) =>
-//       state.filter((item) => item.id !== action.payload)
-//     );
-// });
-
-// const filterReducer = createReducer("", (builder) => {
-//   builder
-//   .addCase(actions.filter, (state, action) => (action.payload))
-// });
 
 const contactsReducer = combineReducers({
   items: itemsReducer,
   filter: filterReducer,
+  loading: loadingReducer,
+  error: errorReducer,
 });
 
 export default contactsReducer;
-
-// Create reducers with use Vanilla Redux (without Redux Toolkit)
-// const itemsReducer = (state = [], { type, payload }) => {
-//   switch (type) {
-//     case actionTypes.ADD:
-//       return [payload, ...state];
-
-//     case actionTypes.DEL:
-//       return state.filter((item) => item.id !== payload);
-
-//     default:
-//       return state;
-//   }
-// };
-
-// const filterReducer = (state = "", { type, payload }) => {
-//   switch (type) {
-//     case actionTypes.FILTER:
-//       return payload;
-
-//     default:
-//       return state;
-//   }
-// };

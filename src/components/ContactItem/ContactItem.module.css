@@ -8,8 +8,14 @@
 
 .tel {
   margin-left: 10px;
+  margin-right: auto;
 }
 
 .btn {
+  margin-left: 10px;
+}
+
+.loader {
+  text-align: right;
   margin-left: auto;
 }

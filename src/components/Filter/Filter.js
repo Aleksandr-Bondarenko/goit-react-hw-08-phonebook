@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import * as actions from "../../redux/contacts/contacts-actions";
+import { filterContacts } from "../../redux/contacts/contacts-actions";
 import { getFilter } from "../../redux/contacts/contacts-selectors";
 import s from "./Filter.module.css";
 
@@ -22,7 +22,7 @@ function Filter() {
         value={value}
         id={filterInputId}
         onChange={(event) =>
-          dispatch(actions.filter(event.currentTarget.value))
+          dispatch(filterContacts(event.currentTarget.value))
         }
         autoComplete="off"
       />

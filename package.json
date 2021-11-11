@@ -8,9 +8,13 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.24.0",
+    "json-server": "^0.17.0",
     "mrm": "^3.0.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hot-toast": "^2.1.1",
+    "react-loading": "^2.0.3",
     "react-redux": "^7.2.6",
     "react-scripts": "4.0.3",
     "redux": "^4.1.2",
@@ -24,6 +28,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "server": "json-server --watch db.json --port 4140 --delay 800",
     "prepare": "husky install"
   },
   "eslintConfig": {
