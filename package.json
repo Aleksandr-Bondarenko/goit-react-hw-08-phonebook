@@ -1,15 +1,14 @@
 {
-  "name": "goit-react-hw-07-phonebook-json-server",
+  "name": "goit-react-hw-07-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Aleksandr-Bondarenko.github.io/goit-react-hw-07-phonebook-json-server",
+  "homepage": "https://Aleksandr-Bondarenko.github.io/goit-react-hw-07-phonebook",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
-    "json-server": "^0.17.0",
     "mrm": "^3.0.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -19,7 +18,6 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.2",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,7 +26,6 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "server": "json-server --watch db.json --port 4140 --delay 800",
     "prepare": "husky install"
   },
   "eslintConfig": {
@@ -56,7 +53,6 @@
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
     "prop-types": "^15.7.2",
-    "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6"
   },
   "lint-staged": {
