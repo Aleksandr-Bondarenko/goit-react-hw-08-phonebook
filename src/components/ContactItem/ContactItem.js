@@ -3,22 +3,23 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Loader from "react-loading";
 import { getLoading } from "../../redux/contacts/contacts-selectors";
-import { delContact } from "../../redux/contacts/contacts-operations";
+import { delContacts } from "../../redux/contacts/contacts-operations";
 import s from "./ContactItem.module.css";
 
-function ContactItem({ id, name, number }) {
+function ContactItem({ id, name, phone }) {
   const loading = useSelector(getLoading);
   const [isBtnLoader, setIsBtnLoader] = useState(loading);
 
   const dispatch = useDispatch();
+
   const toDelContact = (id, name) => {
     setIsBtnLoader(!loading);
-    dispatch(delContact(id, name));
+    dispatch(delContacts({ id, name }));
   };
 
   return (
     <li className={s.item}>
-      {name}: <span className={s.tel}>{number}</span>
+      {name}: <span className={s.tel}>{phone}</span>
       {isBtnLoader && (
         <Loader
           className={"s.loader"}
@@ -45,7 +46,7 @@ function ContactItem({ id, name, number }) {
 export default ContactItem;
 
 ContactItem.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   name: PropTypes.string,
-  number: PropTypes.string,
+  phone: PropTypes.string,
 };

@@ -3,19 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import Loader from "react-loading";
-import { addContact } from "../../redux/contacts/contacts-operations";
+import { addContacts } from "../../redux/contacts/contacts-operations";
 import { getItems, getLoading } from "../../redux/contacts/contacts-selectors";
 import s from "./ContactForm.module.css";
 
 function ContactForm() {
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [phone, setPhone] = useState("");
 
   const isLoading = useSelector(getLoading);
   // const [isAddBtnLoading, setIsAddBtnLoading] = useState(isLoading);
 
   const nameId = useRef("");
-  const numberId = useRef("");
+  const phoneId = useRef("");
 
   const currentContacts = useSelector(getItems);
 
@@ -23,7 +23,7 @@ function ContactForm() {
 
   useEffect(() => {
     nameId.current = uuidv4();
-    numberId.current = uuidv4();
+    phoneId.current = uuidv4();
   }, []);
 
   const handleInputChange = (e) => {
@@ -32,8 +32,8 @@ function ContactForm() {
         setName(e.currentTarget.value);
         break;
 
-      case "number":
-        setNumber(e.currentTarget.value);
+      case "phone":
+        setPhone(e.currentTarget.value);
         break;
 
       default:
@@ -41,13 +41,17 @@ function ContactForm() {
     }
   };
 
-  const toAddContact = (name, number) => {
-    dispatch(addContact(name, number));
+  const toAddContact = (name, phone) => {
+    const contact = {
+      name,
+      phone,
+    };
+    dispatch(addContacts(contact));
   };
 
   const resetForm = () => {
     setName("");
-    setNumber("");
+    setPhone("");
   };
 
   const handleSubmit = (e) => {
@@ -59,7 +63,7 @@ function ContactForm() {
       return;
     }
 
-    toAddContact(name, number);
+    toAddContact(name, phone);
     resetForm();
     // setTimeout(() => setIsAddBtnLoading(false), 20000);
   };
@@ -85,18 +89,18 @@ function ContactForm() {
         onChange={handleInputChange}
       />
 
-      <label className={s.label} htmlFor={numberId.current}>
+      <label className={s.label} htmlFor={phoneId.current}>
         Number
       </label>
       <input
         className={s.input}
         type="tel"
-        name="number"
+        name="phone"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
         required
-        value={number}
-        id={numberId.current}
+        value={phone}
+        id={phoneId.current}
         onChange={handleInputChange}
       />
 

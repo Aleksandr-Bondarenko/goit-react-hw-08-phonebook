@@ -8,7 +8,6 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/Filter/Filter";
 import ContactsList from "./components/ContactsList/ContactsList.js";
 import {
-  getError,
   getLoading,
   getFilter,
   getVisibleContacts,
@@ -19,7 +18,6 @@ function App() {
   const visibleContacts = useSelector(getVisibleContacts);
   const filter = useSelector(getFilter);
   const isContactsLoading = useSelector(getLoading);
-  const Error = useSelector(getError);
 
   const dispatch = useDispatch();
 
@@ -53,8 +51,6 @@ function App() {
       ) : (
         <ContactsList />
       )}
-
-      {Error && <p className="notifyText">{Error}</p>}
 
       <Toaster
         position="top-center"

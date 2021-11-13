@@ -1,55 +1,46 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {
-  fetchContactsRequest,
-  fetchContactsSuccess,
-  fetchContactsError,
-  addContactsRequest,
-  addContactsSuccess,
-  addContactsError,
-  delContactsRequest,
-  delContactsSuccess,
-  delContactsError,
-} from "./contacts-actions";
 
-axios.defaults.baseURL = "http://localhost:4140";
+axios.defaults.baseURL = "https://618db362fe09aa0017440860.mockapi.io";
 
-export const fetchContacts = () => (dispatch) => {
-  dispatch(fetchContactsRequest());
+export const fetchContacts = createAsyncThunk(
+  "contacts/fetchContacts",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await axios.get("/contacts").then(({ data }) => data);
+    } catch (error) {
+      toast.error(`Oops, ${error.message}.`);
+      return rejectWithValue(error);
+    }
+  }
+);
 
-  axios
-    .get("/contacts")
-    .then(({ data }) => dispatch(fetchContactsSuccess(data)))
-    .catch((error) => dispatch(fetchContactsError(error)));
-};
+export const addContacts = createAsyncThunk(
+  "contacts/addContacts",
+  async (contact, { rejectWithValue }) => {
+    try {
+      return await axios.post("/contacts", contact).then(({ data }) => {
+        toast.success(`Contact ${contact.name} successfully added.`);
+        return data;
+      });
+    } catch (error) {
+      toast.error(`Oops, ${error.message}`);
+      return rejectWithValue(error);
+    }
+  }
+);
 
-export const addContact = (name, number, isSubmitForm) => (dispatch) => {
-  const contact = {
-    name,
-    number,
-  };
-
-  dispatch(addContactsRequest());
-
-  axios
-    .post("/contacts", contact)
-    .then(({ data }) => {
-      toast.success(`Contact ${name} successfully added.`);
-      console.log("Нужно убрать лоадер");
-      console.log(isSubmitForm);
-      dispatch(addContactsSuccess(data));
-    })
-    .catch((error) => dispatch(addContactsError(error)));
-};
-
-export const delContact = (contactId, contactName) => (dispatch) => {
-  dispatch(delContactsRequest());
-
-  axios
-    .delete(`/contacts/${contactId}`)
-    .then(() => {
-      toast.success(`Contact ${contactName} successfully deleted.`);
-      dispatch(delContactsSuccess(contactId));
-    })
-    .catch((error) => dispatch(delContactsError(error)));
-};
+export const delContacts = createAsyncThunk(
+  "contacts/delContacts",
+  async (delContact, { rejectWithValue }) => {
+    try {
+      await axios.delete(`/contacts/${delContact.id}`).then(() => {
+        toast.success(`Contact ${delContact.name} successfully deleted.`);
+      });
+    } catch (error) {
+      toast.error(`Oops, ${error.message}`);
+      return rejectWithValue(error);
+    }
+  }
+);
