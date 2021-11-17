@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
@@ -14,17 +14,12 @@ function ContactForm() {
   const isLoading = useSelector(getLoading);
   // const [isAddBtnLoading, setIsAddBtnLoading] = useState(isLoading);
 
-  const nameId = useRef("");
-  const phoneId = useRef("");
+  const nameId = useRef(uuidv4());
+  const phoneId = useRef(uuidv4());
 
   const currentContacts = useSelector(getItems);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    nameId.current = uuidv4();
-    phoneId.current = uuidv4();
-  }, []);
 
   const handleInputChange = (e) => {
     switch (e.currentTarget.name) {
@@ -41,10 +36,10 @@ function ContactForm() {
     }
   };
 
-  const toAddContact = (name, phone) => {
+  const toAddContact = (name, number) => {
     const contact = {
       name,
-      phone,
+      number,
     };
     dispatch(addContacts(contact));
   };

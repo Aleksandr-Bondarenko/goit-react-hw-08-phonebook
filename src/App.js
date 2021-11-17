@@ -1,57 +1,33 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Loader from "react-loading";
+import { useDispatch } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import { fetchContacts } from "./redux/contacts/contacts-operations";
-import ContactForm from "./components/ContactForm/ContactForm";
-import Filter from "./components/Filter/Filter";
-import ContactsList from "./components/ContactsList/ContactsList.js";
-import {
-  getLoading,
-  getFilter,
-  getVisibleContacts,
-} from "./redux/contacts/contacts-selectors";
+import AppBar from "./components/AppBar/AppBar";
+import ContactsPage from "./pages/ContactsPage/ContactsPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { refreshUser } from "./redux/auth/auth-operations";
+
 import "./App.css";
 
 function App() {
-  const visibleContacts = useSelector(getVisibleContacts);
-  const filter = useSelector(getFilter);
-  const isContactsLoading = useSelector(getLoading);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (
     <div className="App">
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2 className="listTitle">Contacts</h2>
-      <Filter />
-
-      {visibleContacts.length === 0 ? (
-        isContactsLoading ? (
-          <Loader
-            className={"ContactsLoader"}
-            type={"spinningBubbles"}
-            color={"#2b2626"}
-            height={80}
-            width={80}
-          />
-        ) : (
-          <p className="notifyText">
-            {filter.length > 0
-              ? "No results for your search"
-              : "No contacts yet"}
-          </p>
-        )
-      ) : (
-        <ContactsList />
-      )}
-
+      <AppBar />
+      <Routes>
+        <Route path="/" element={<h1>Home Page</h1>} />
+        <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<h2>Not Found Page</h2>} />
+      </Routes>
       <Toaster
         position="top-center"
         reverseOrder={true}

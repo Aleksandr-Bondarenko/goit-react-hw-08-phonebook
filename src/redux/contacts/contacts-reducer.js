@@ -3,6 +3,7 @@ import { filterContacts } from "./contacts-actions";
 import { fetchContacts, addContacts, delContacts } from "./contacts-operations";
 
 const itemsReducer = createReducer([], {
+  [fetchContacts.pending]: () => [],
   [fetchContacts.fulfilled]: (_, { payload }) => payload.reverse(),
   [addContacts.fulfilled]: (state, { payload }) => [payload, ...state],
   [delContacts.fulfilled]: (state, action) =>

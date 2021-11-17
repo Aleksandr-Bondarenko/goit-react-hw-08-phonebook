@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { filterContacts } from "../../redux/contacts/contacts-actions";
@@ -8,11 +9,11 @@ function Filter() {
   const value = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const filterInputId = uuidv4();
+  const filterInputId = useRef(uuidv4());
 
   return (
     <div className={s.filter}>
-      <label className={s.label} htmlFor={filterInputId}>
+      <label className={s.label} htmlFor={filterInputId.current}>
         Find contacts by name:
       </label>
       <input
@@ -20,7 +21,7 @@ function Filter() {
         type="text"
         name="filter"
         value={value}
-        id={filterInputId}
+        id={filterInputId.current}
         onChange={(event) =>
           dispatch(filterContacts(event.currentTarget.value))
         }
