@@ -7,7 +7,7 @@ const itemsReducer = createReducer([], {
   [fetchContacts.fulfilled]: (_, { payload }) => payload.reverse(),
   [addContacts.fulfilled]: (state, { payload }) => [payload, ...state],
   [delContacts.fulfilled]: (state, action) =>
-    state.filter((item) => item.id !== action.meta.arg.id),
+    state.filter((item) => item.id !== action.payload),
 });
 
 const loadingReducer = createReducer(false, {

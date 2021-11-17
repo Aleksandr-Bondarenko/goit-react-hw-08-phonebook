@@ -11,20 +11,10 @@ function AppBar() {
   return (
     <div>
       <nav>
-        <NavLink
-          to="/"
-          className={({ isActive }) => {
-            return isActive ? `${s.active} ${s.link}` : `${s.link}`;
-          }}
-        >
+        <NavLink to="/" className={s.link}>
           Home
         </NavLink>
-        <NavLink
-          to="contacts"
-          className={({ isActive }) => {
-            return isActive ? `${s.active} ${s.link}` : `${s.link}`;
-          }}
-        >
+        <NavLink to="contacts" className={s.link}>
           Contacts
         </NavLink>
       </nav>

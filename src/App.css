@@ -19,3 +19,7 @@
 .Toaster {
   border-radius: 20px;
 }
+
+.active {
+  color: red;
+}
