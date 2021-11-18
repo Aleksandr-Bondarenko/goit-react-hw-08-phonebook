@@ -16,40 +16,49 @@ const token = {
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (registrationData) => {
+  async (registrationData, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/users/signup", registrationData);
       toast.success(
         `User with name ${data.user.name} was registered successfully.`
       );
       token.set(data.token);
+
       return data;
     } catch (error) {
-      console.log(error);
-      return error;
+      toast.error(`${error}`);
+      return rejectWithValue(error);
     }
   }
 );
 
-export const logIn = createAsyncThunk("auth/login", async (loginData) => {
-  try {
-    const { data } = await axios.post("/users/login", loginData);
-    toast.success(`Welcome, ${data.user.name}!`);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    return error;
+export const logIn = createAsyncThunk(
+  "auth/login",
+  async (loginData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/users/login", loginData);
+      toast.success(`Welcome, ${data.user.name}!`);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      toast.error(`${error}`);
+      return rejectWithValue(error);
+    }
   }
-});
+);
 
-export const logOut = createAsyncThunk("auth/logout", async () => {
-  try {
-    await axios.post("/users/logout");
-    token.unset();
-  } catch (error) {
-    return error;
+export const logOut = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await axios.post("/users/logout");
+      token.unset();
+    } catch (error) {
+      toast.error(`${error}`);
+      return rejectWithValue(error);
+    }
   }
-});
+);
 
 export const refreshUser = createAsyncThunk(
   "auth/refresh-user",
@@ -65,7 +74,8 @@ export const refreshUser = createAsyncThunk(
       const { data } = await axios.get("/users/current");
       return data;
     } catch (error) {
-      return error;
+      toast.error(`${error}`);
+      return ThunkAPI.rejectWithValue(error);
     }
   }
 );

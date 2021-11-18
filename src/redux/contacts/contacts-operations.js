@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { modalVisible } from "./contacts-actions";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
@@ -44,6 +45,22 @@ export const delContacts = createAsyncThunk(
     } catch (error) {
       toast.error(`Oops, ${error.message}`);
       return rejectWithValue(error);
+    }
+  }
+);
+
+export const editContacts = createAsyncThunk(
+  "contacts/editContacts",
+  async (contact, thunkAPI) => {
+    try {
+      const { id, name, number } = contact;
+      const { data } = await axios.patch(`/contacts/${id}`, { name, number });
+      toast.success(`Contact ${name} successfully edited.`);
+      thunkAPI.dispatch(modalVisible(false));
+      return data;
+    } catch (error) {
+      toast.error(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

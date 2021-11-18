@@ -2,21 +2,18 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-
-import PrivateRoute from "./components/PrivateRoute";
-import PublicRoute from "./components/PublicRoute";
 import AppBar from "./components/AppBar/AppBar";
 import ContactsPage from "./pages/ContactsPage/ContactsPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { refreshUser } from "./redux/auth/auth-operations";
-// import { getIsLoggedIn } from "./redux/auth/auth-selectors";
+import { getIsLoggedIn } from "./redux/auth/auth-selectors";
 
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  // const isLoggedIn = useSelector(getIsLoggedIn);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -25,34 +22,8 @@ function App() {
   return (
     <div className="App">
       <AppBar />
+
       <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
-
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute privatePage={<ContactsPage />} publicUrl={"/login"} />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PublicRoute
-              publicPage={<RegisterPage />}
-              privateUrl={"/contacts"}
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute publicPage={<LoginPage />} privateUrl={"/contacts"} />
-          }
-        />
-        <Route path="*" element={<h2>Not Found Page</h2>} />
-      </Routes>
-
-      {/* <Routes>
         <Route path="/" element={<h1>Home Page</h1>} />
         <Route
           path="/contacts"
@@ -64,12 +35,10 @@ function App() {
         />
         <Route
           path="/login"
-          element={
-            isLoggedIn ? <Navigate to="/contacts" /> : <LoginPage />
-          }
+          element={isLoggedIn ? <Navigate to="/contacts" /> : <LoginPage />}
         />
         <Route path="*" element={<h2>Not Found Page</h2>} />
-      </Routes> */}
+      </Routes>
 
       <Toaster
         position="top-center"
