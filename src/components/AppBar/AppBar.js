@@ -14,9 +14,12 @@ function AppBar() {
         <NavLink to="/" className={s.link}>
           Home
         </NavLink>
-        <NavLink to="contacts" className={s.link}>
-          Contacts
-        </NavLink>
+
+        {isLoggedIn && (
+          <NavLink to="contacts" className={s.link}>
+            Contacts
+          </NavLink>
+        )}
       </nav>
 
       {isLoggedIn ? <UserMenu /> : <AuthNav />}

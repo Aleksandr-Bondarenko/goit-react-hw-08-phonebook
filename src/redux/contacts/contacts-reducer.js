@@ -79,29 +79,3 @@ const contactsReducer = combineReducers({
 });
 
 export default contactsReducer;
-
-// const contactsSlice = createSlice({
-//   name: "contacts",
-
-//   initialState: {
-//     items: [],
-//     filter: "",
-//     loading: false,
-//     error: null,
-//   },
-
-//   reducers: {
-//     [filterContacts]: (state, action) => (state.filter = action.payload),
-//   },
-
-//   extraReducers: {
-//     [fetchContacts.fulfilled]: (state, { payload }) => {
-//       state.items.push(...payload);
-//       state.loading = false;
-//     },
-//     [fetchContacts.pending]: (state, _) => (state.loading = true),
-//     [fetchContacts.rejected]: (state, _) => (state.loading = false),
-//   },
-// });
-
-// export default contactsSlice.reducer;

@@ -56,6 +56,14 @@ function ContactForm() {
     if (currentContacts.find((contact) => contact.name === name)) {
       toast.error(`${name} is already in contacts.`);
       return;
+    } else if (currentContacts.find((contact) => contact.number === phone)) {
+      const doubleContact = currentContacts.filter(
+        (contact) => contact.number === phone
+      );
+      toast.error(
+        `A number ${phone} is assigned to a contact with name ${doubleContact[0].name}.`
+      );
+      return;
     }
 
     toAddContact(name, phone);

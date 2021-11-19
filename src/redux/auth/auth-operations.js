@@ -26,7 +26,7 @@ export const register = createAsyncThunk(
 
       return data;
     } catch (error) {
-      toast.error(`${error}`);
+      toast.error(`Oops, ${error}:(`);
       return rejectWithValue(error);
     }
   }
@@ -41,7 +41,7 @@ export const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      toast.error(`${error}`);
+      toast.error(`Oops, ${error}:(`);
       return rejectWithValue(error);
     }
   }
@@ -54,7 +54,7 @@ export const logOut = createAsyncThunk(
       await axios.post("/users/logout");
       token.unset();
     } catch (error) {
-      toast.error(`${error}`);
+      toast.error(`Oops, ${error}:(`);
       return rejectWithValue(error);
     }
   }
@@ -74,7 +74,7 @@ export const refreshUser = createAsyncThunk(
       const { data } = await axios.get("/users/current");
       return data;
     } catch (error) {
-      toast.error(`${error}`);
+      toast.error(`Oops, ${error}:(`);
       return ThunkAPI.rejectWithValue(error);
     }
   }

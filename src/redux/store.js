@@ -15,8 +15,7 @@ import authReducer from "./auth/auth-reducer";
 import storage from "redux-persist/lib/storage";
 
 const getMiddleware = (getDefaultMiddleware) =>
-  // process.env.NODE_ENV === "development" ?
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === "development"
     ? getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
