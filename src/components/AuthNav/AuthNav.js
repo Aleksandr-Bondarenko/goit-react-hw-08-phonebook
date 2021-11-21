@@ -3,12 +3,12 @@ import s from "./AuthNav.module.css";
 
 function AuthNav() {
   return (
-    <div>
+    <div className={s.box}>
       <NavLink to="register" className={s.link}>
         Registration
       </NavLink>
       <NavLink to="login" className={s.link}>
-        Login
+        Log in
       </NavLink>
     </div>
   );

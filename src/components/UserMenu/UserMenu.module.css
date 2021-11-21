@@ -1,0 +1,22 @@
+.box {
+  text-align: right;
+}
+
+.logout {
+  font-family: "Signika", sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.text,
+.email {
+  color: #f0850c;
+  font-size: 13px;
+}
+
+.email {
+  color: #ffffff;
+}

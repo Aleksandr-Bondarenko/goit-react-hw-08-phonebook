@@ -124,17 +124,17 @@ function UserForm({ url }) {
           </>
         )}
         <button type="submit">
-          {url === "/register" ? "Register" : "Login"}
+          {url === "/register" ? "Register" : "Log in"}
         </button>
       </form>
 
       {isLoading && (
         <Loader
-          className={"s.loader"}
+          className={s.loader}
           type={"spinningBubbles"}
           color={"#2b2626"}
-          height={50}
-          width={50}
+          height={80}
+          width={80}
         />
       )}
     </>

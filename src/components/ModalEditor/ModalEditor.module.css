@@ -4,7 +4,12 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(94, 94, 94, 0.473);
+  background-image: linear-gradient(
+    to top,
+    #18171798 5%,
+    #f0860ca1 70%,
+    #1817178f
+  );
   overflow-y: scroll;
 }
 
@@ -17,5 +22,6 @@
   height: 200px;
   padding: 40px;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-image: linear-gradient(to left, #f0860c 2%, #181717 92%, #f0860c);
+  box-shadow: 0 0 55px 20px #181717;
 }

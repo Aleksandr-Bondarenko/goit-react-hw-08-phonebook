@@ -9,8 +9,8 @@ function AppBar() {
   const isLoggedIn = useSelector(getIsLoggedIn);
 
   return (
-    <div>
-      <nav>
+    <div className={s.appBar}>
+      <nav className={s.navBox}>
         <NavLink to="/" className={s.link}>
           Home
         </NavLink>

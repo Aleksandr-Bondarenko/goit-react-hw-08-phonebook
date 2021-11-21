@@ -1,0 +1,31 @@
+.box {
+  display: flex;
+}
+
+.leftSide {
+  margin-right: 50px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.logoutLoader {
+  position: absolute;
+  top: 40vh;
+  left: calc(50vw - 40px);
+  margin: 0 auto;
+}
+
+.notifyText {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ff0000;
+}
+
+/* .ContactsLoader {
+  margin: 50px auto;
+  color: #2b2626;
+} */

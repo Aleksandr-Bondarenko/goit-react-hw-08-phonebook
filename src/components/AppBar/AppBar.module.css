@@ -1,11 +1,13 @@
+.appBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px 25px;
+}
+
 .link {
-  text-decoration: none;
+  color: #ffffff;
 }
 
 .link:not(:last-child) {
   margin-right: 20px;
 }
-
-/* .active {
-  color: red;
-} */

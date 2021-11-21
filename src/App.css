@@ -1,19 +1,14 @@
+button {
+  cursor: pointer;
+}
+
 .App {
-  padding: 15px;
+  padding: 20px;
 }
 
-.notifyText {
-  margin: 20px 0;
-  color: red;
-}
-
-.listTitle {
-  margin-top: 25px;
-}
-
-.ContactsLoader {
-  margin: 50px auto;
-  color: #2b2626;
+.notFoundTitle {
+  text-align: center;
+  margin-top: 35px;
 }
 
 .Toaster {
@@ -21,5 +16,5 @@
 }
 
 .active {
-  color: red;
+  color: #f0850c;
 }

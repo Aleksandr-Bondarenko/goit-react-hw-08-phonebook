@@ -76,7 +76,10 @@ function App() {
               )
             }
           />
-          <Route path="*" element={<h1>404 Not Found Page</h1>} />
+          <Route
+            path="*"
+            element={<h1 className="notFoundTitle">404 - "Page Not Found" </h1>}
+          />
         </Routes>
 
         <Toaster

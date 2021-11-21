@@ -1,4 +1,6 @@
 .list {
   margin-top: 20px;
-  max-width: 400px;
+  padding-bottom: 120px;
+  min-width: 400px;
+  list-style: url("https://ru.freepik.com/free-icon/group-meeting_695123.htm");
 }

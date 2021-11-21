@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "react-loading";
 import PropTypes from "prop-types";
 import {
   modalVisible,
@@ -9,6 +8,13 @@ import {
 import { getLoading, getIsShow } from "../../redux/contacts/contacts-selectors";
 import { delContacts } from "../../redux/contacts/contacts-operations";
 import ModalEditor from "../ModalEditor/ModalEditor";
+
+import { LoadingButton } from "@mui/lab";
+import { ThemeProvider } from "@mui/material/styles";
+import themeBtn from "./ContactItemStyleOverrides";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import s from "./ContactItem.module.css";
 
 function ContactItem({ id, name, phone }) {
@@ -30,39 +36,42 @@ function ContactItem({ id, name, phone }) {
   };
 
   return (
-    <li className={s.item}>
-      {name}: <span className={s.tel}>{phone}</span>
-      {isBtnLoader && (
-        <Loader
-          className={"s.loader"}
-          type={"spinningBubbles"}
-          color={"#2b2626"}
-          height={15}
-          width={15}
-        />
-      )}
-      <button
-        className={s.btn}
-        onClick={() => {
-          toDelContact(id, name);
-        }}
-        type="button"
-        disabled={isBtnLoader}
-      >
-        Delete
-      </button>
-      <button
-        className={s.btn}
-        onClick={() => {
-          toShowModal(id, name, phone);
-        }}
-        type="button"
-        disabled={isBtnLoader}
-      >
-        Edit
-      </button>
-      {isShowModal && <ModalEditor />}
-    </li>
+    <div className={s.itemBox}>
+      <DoubleArrowIcon />
+      <li className={s.item}>
+        <span>
+          {name}:<span className={s.tel}>{phone}</span>
+        </span>
+        <div className={s.btnBox}>
+          <ThemeProvider theme={themeBtn}>
+            <LoadingButton
+              loading={isBtnLoader}
+              loadingPosition="start"
+              startIcon={<DeleteIcon />}
+              variant="outlined"
+              onClick={() => {
+                toDelContact(id, name);
+              }}
+            >
+              Delete
+            </LoadingButton>
+            <LoadingButton
+              className="sizeSmall"
+              loading={false}
+              loadingPosition="start"
+              startIcon={<EditIcon />}
+              variant="outlined"
+              onClick={() => {
+                toShowModal(id, name, phone);
+              }}
+            >
+              Edit
+            </LoadingButton>
+          </ThemeProvider>
+        </div>
+        {isShowModal && <ModalEditor />}
+      </li>
+    </div>
   );
 }
 

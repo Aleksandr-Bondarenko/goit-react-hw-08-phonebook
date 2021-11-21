@@ -1,5 +1,14 @@
-.item {
+.itemBox {
   display: flex;
+  align-items: center;
+}
+
+.item {
+  display: inline-flex;
+  text-align: left;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 500px;
 }
 
 .item:not(:last-child) {
@@ -11,11 +20,17 @@
   margin-right: auto;
 }
 
-.btn {
-  margin-left: 10px;
+.btnBox {
+  display: flex;
+  width: 160px;
+  justify-content: space-between;
 }
 
-.loader {
+/* .btn {
+  margin-left: 10px;
+} */
+
+/* .loader {
   text-align: right;
   margin-left: auto;
-}
+} */

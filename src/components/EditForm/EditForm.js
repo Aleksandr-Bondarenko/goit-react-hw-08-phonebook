@@ -5,15 +5,26 @@ import toast from "react-hot-toast";
 import {
   getEditableData,
   getItems,
+  getLoading,
 } from "../../redux/contacts/contacts-selectors";
 import { editContacts } from "../../redux/contacts/contacts-operations";
 import s from "./EditForm.module.css";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import { LoadingButton } from "@mui/lab";
+import PhoneIcon from "@mui/icons-material/Phone";
+import PersonIcon from "@mui/icons-material/Person";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import { ThemeProvider } from "@mui/material/styles";
+import themeEditForm from "./EditFormStyleOverrides";
 
 function EditForm() {
   const dispatch = useDispatch();
 
   const editableData = useSelector(getEditableData);
   const currentContacts = useSelector(getItems);
+  const isLoading = useSelector(getLoading);
 
   const [editableName, setEditableName] = useState(editableData.name);
   const [editablePhone, setEditablePhone] = useState(editableData.phone);
@@ -71,8 +82,47 @@ function EditForm() {
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit} name="edit_contacts_form">
-      <label className={s.label} htmlFor={nameId.current}>
+    <ThemeProvider theme={themeEditForm}>
+      <form
+        className={s.form}
+        onSubmit={handleSubmit}
+        name="edit_contacts_form"
+      >
+        <InputLabel htmlFor={nameId.current}>Name</InputLabel>
+        <Input
+          id={nameId.current}
+          type="text"
+          name="edit-name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          required
+          value={editableName}
+          onChange={handleInputChange}
+          startAdornment={
+            <InputAdornment position="start">
+              <PersonIcon />
+            </InputAdornment>
+          }
+        />
+
+        <InputLabel htmlFor={phoneId.current}>Phone number</InputLabel>
+        <Input
+          id={phoneId.current}
+          type="tel"
+          name="edit-phone"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+          required
+          value={editablePhone}
+          onChange={handleInputChange}
+          startAdornment={
+            <InputAdornment position="start">
+              <PhoneIcon />
+            </InputAdornment>
+          }
+        />
+
+        {/* <label className={s.label} htmlFor={nameId.current}>
         Name
       </label>
       <input
@@ -85,9 +135,9 @@ function EditForm() {
         value={editableName}
         id={nameId.current}
         onChange={handleInputChange}
-      />
+      /> */}
 
-      <label className={s.label} htmlFor={phoneId.current}>
+        {/* <label className={s.label} htmlFor={phoneId.current}>
         Number
       </label>
       <input
@@ -100,14 +150,25 @@ function EditForm() {
         value={editablePhone}
         id={phoneId.current}
         onChange={handleInputChange}
-      />
+      /> */}
 
-      <div className={s.box}>
-        <button className={s.btn} type="submit" disabled={false}>
+        <div className={s.box}>
+          {/* <button className={s.btn} type="submit" disabled={false}>
           Edit contact
-        </button>
-      </div>
-    </form>
+        </button> */}
+
+          <LoadingButton
+            loading={isLoading}
+            loadingPosition="end"
+            endIcon={<SendOutlinedIcon />}
+            variant="outlined"
+            type="submit"
+          >
+            Submit changes
+          </LoadingButton>
+        </div>
+      </form>
+    </ThemeProvider>
   );
 }
 

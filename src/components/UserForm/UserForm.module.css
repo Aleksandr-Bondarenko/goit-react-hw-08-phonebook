@@ -1,0 +1,6 @@
+.loader {
+  position: absolute;
+  top: 40vh;
+  left: calc(50vw - 40px);
+  margin: 0 auto;
+}
