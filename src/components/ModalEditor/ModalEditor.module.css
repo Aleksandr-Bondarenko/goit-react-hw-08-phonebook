@@ -6,9 +6,9 @@
   height: 100vh;
   background-image: linear-gradient(
     to top,
-    #18171798 5%,
-    #f0860ca1 70%,
-    #1817178f
+    #1817176b 5%,
+    #f0860c6e 70%,
+    #18171777
   );
   overflow-y: scroll;
 }
@@ -19,9 +19,26 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 200px;
+  height: 180px;
   padding: 40px;
   border-radius: 10px;
   background-image: linear-gradient(to left, #f0860c 2%, #181717 92%, #f0860c);
   box-shadow: 0 0 55px 20px #181717;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 35px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  transition: box-shadow linear 300ms;
+}
+
+.closeBtn:hover {
+  box-shadow: 0 0 25px 10px #ffffffcc;
+  color: #ffffffcc;
 }

@@ -1,25 +1,53 @@
 .form {
-  width: 250px;
-  border: 1px dashed rgba(31, 111, 202, 0.781);
+  width: 230px;
+  border: 1px dashed #ffffffaf;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  padding: 15px 40px 15px 20px;
+  padding: 25px 25px 15px 25px;
 }
 
 .input,
-.label,
-.btn {
-  align-self: flex-start;
+.label {
+  display: inline-flex;
+  align-items: flex-end;
+  /* align-self: flex-start; */
+  padding-bottom: 5px;
 }
 
 .label:not(:first-child) {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
-.box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 15px;
-  width: 130px;
+.labelText {
+  margin-left: 10px;
+}
+
+.input {
+  width: 230px;
+  font-family: "Signika", sans-serif;
+  font-size: 16px;
+  color: #000000;
+  background-color: transparent;
+  border: none;
+  border-bottom: 0.5px solid #000000;
+}
+
+.input:hover {
+  outline: none;
+  box-shadow: inset 0px -3px 0px -2px #000000;
+  transition: box-shadow linear 100ms;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: inset 0px -8px 3px -4px #ff8901;
+  border-radius: 3px;
+  border-color: #ff8901;
+  transition: box-shadow linear 500ms;
+}
+
+.btnBox {
+  margin-top: 40px;
+  text-align: center;
 }

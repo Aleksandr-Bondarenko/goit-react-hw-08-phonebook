@@ -122,41 +122,7 @@ function EditForm() {
           }
         />
 
-        {/* <label className={s.label} htmlFor={nameId.current}>
-        Name
-      </label>
-      <input
-        className={s.input}
-        type="text"
-        name="edit-name"
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-        required
-        value={editableName}
-        id={nameId.current}
-        onChange={handleInputChange}
-      /> */}
-
-        {/* <label className={s.label} htmlFor={phoneId.current}>
-        Number
-      </label>
-      <input
-        className={s.input}
-        type="tel"
-        name="edit-phone"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-        required
-        value={editablePhone}
-        id={phoneId.current}
-        onChange={handleInputChange}
-      /> */}
-
         <div className={s.box}>
-          {/* <button className={s.btn} type="submit" disabled={false}>
-          Edit contact
-        </button> */}
-
           <LoadingButton
             loading={isLoading}
             loadingPosition="end"

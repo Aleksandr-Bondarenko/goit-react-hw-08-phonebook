@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-const themeBtn = createTheme({
+const themeContactItem = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
@@ -43,4 +43,4 @@ const themeBtn = createTheme({
   },
 });
 
-export default themeBtn;
+export default themeContactItem;

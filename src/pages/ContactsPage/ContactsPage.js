@@ -32,7 +32,7 @@ function ContactsPage() {
         <Loader
           className={s.logoutLoader}
           type={"spinningBubbles"}
-          color={"#2b2626"}
+          color={"#ffffffb0"}
           height={80}
           width={80}
         />
@@ -49,9 +49,9 @@ function ContactsPage() {
         {visibleContacts.length === 0 ? (
           isContactsLoading ? (
             <Loader
-              className={"ContactsLoader"}
+              className={s.loader}
               type={"spinningBubbles"}
-              color={"#2b2626"}
+              color={"#ffffffb0"}
               height={80}
               width={80}
             />

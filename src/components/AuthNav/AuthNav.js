@@ -8,7 +8,7 @@ function AuthNav() {
         Registration
       </NavLink>
       <NavLink to="login" className={s.link}>
-        Log in
+        Log In
       </NavLink>
     </div>
   );

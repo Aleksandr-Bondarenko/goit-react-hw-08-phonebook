@@ -1,20 +1,23 @@
 import { createTheme } from "@mui/material/styles";
 
-const themeEditForm = createTheme({
+const themeUserForm = createTheme({
   components: {
     MuiInput: {
       styleOverrides: {
         root: {
-          marginBottom: "20px",
-          width: "280px",
+          color: "#ffffffb0",
+          backgroundColor: "transparent",
           "&:after": {
-            borderBottomColor: "#f0850c",
+            borderBottomColor: "#ffffffb0",
           },
         },
+
         input: {
+          width: "350px",
           fontFamily: "Signika",
-          fontSize: "16px",
-          color: "#ffffffcc",
+          fontSize: "20px",
+          color: "#000000",
+          padding: "0",
         },
       },
     },
@@ -22,45 +25,32 @@ const themeEditForm = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          width: "130px",
-          fontFamily: "Signika",
-          fontSize: "16px",
-          color: "#ffffffcc",
+          "&.Mui-focused": {
+            color: "#ffffffb0",
+          },
         },
       },
     },
 
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          fill: "#f0850c",
-        },
-      },
-    },
     MuiLoadingButton: {
       styleOverrides: {
         root: {
           height: "30px",
-          width: "190px",
           padding: "2px 5px",
           fontFamily: "Signika",
           fontSize: "16px",
           textTransform: "capitalize",
-          color: "#ffffffcc",
-          borderColor: "#ffffffcc",
+          color: "rgba(0, 0, 0, 0.54)",
+          borderColor: "rgba(0, 0, 0, 0.54)",
           "&:hover": {
-            color: "#f0850c",
-            borderColor: "#f0850c",
+            color: "#000000",
+            borderColor: "#ffffffcc",
             boxShadow: "inset 0 0 10px 1px #ffffffcc",
           },
-        },
-
-        endIcon: {
-          marginLeft: "5px",
         },
       },
     },
   },
 });
 
-export default themeEditForm;
+export default themeUserForm;

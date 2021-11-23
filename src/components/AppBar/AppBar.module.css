@@ -1,11 +1,11 @@
 .appBar {
   display: flex;
   justify-content: space-between;
-  padding: 10px 10px 25px;
+  padding-top: 20px;
 }
 
 .link {
-  color: #ffffff;
+  color: #ffffffb0;
 }
 
 .link:not(:last-child) {

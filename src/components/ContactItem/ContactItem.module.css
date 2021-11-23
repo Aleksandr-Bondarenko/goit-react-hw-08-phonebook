@@ -1,10 +1,5 @@
-.itemBox {
-  display: flex;
-  align-items: center;
-}
-
 .item {
-  display: inline-flex;
+  display: flex;
   text-align: left;
   align-items: center;
   justify-content: space-between;
@@ -24,13 +19,5 @@
   display: flex;
   width: 160px;
   justify-content: space-between;
-}
-
-/* .btn {
   margin-left: 10px;
-} */
-
-/* .loader {
-  text-align: right;
-  margin-left: auto;
-} */
+}

@@ -11,7 +11,7 @@ import ModalEditor from "../ModalEditor/ModalEditor";
 
 import { LoadingButton } from "@mui/lab";
 import { ThemeProvider } from "@mui/material/styles";
-import themeBtn from "./ContactItemStyleOverrides";
+import themeContactItem from "./ContactItemStyleOverrides";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
@@ -36,42 +36,38 @@ function ContactItem({ id, name, phone }) {
   };
 
   return (
-    <div className={s.itemBox}>
-      <DoubleArrowIcon />
+    <ThemeProvider theme={themeContactItem}>
       <li className={s.item}>
-        <span>
-          {name}:<span className={s.tel}>{phone}</span>
-        </span>
+        <DoubleArrowIcon />
+        {name}:<span className={s.tel}>{phone}</span>
         <div className={s.btnBox}>
-          <ThemeProvider theme={themeBtn}>
-            <LoadingButton
-              loading={isBtnLoader}
-              loadingPosition="start"
-              startIcon={<DeleteIcon />}
-              variant="outlined"
-              onClick={() => {
-                toDelContact(id, name);
-              }}
-            >
-              Delete
-            </LoadingButton>
-            <LoadingButton
-              className="sizeSmall"
-              loading={false}
-              loadingPosition="start"
-              startIcon={<EditIcon />}
-              variant="outlined"
-              onClick={() => {
-                toShowModal(id, name, phone);
-              }}
-            >
-              Edit
-            </LoadingButton>
-          </ThemeProvider>
+          <LoadingButton
+            loading={isBtnLoader}
+            loadingPosition="start"
+            startIcon={<DeleteIcon />}
+            variant="outlined"
+            onClick={() => {
+              toDelContact(id, name);
+            }}
+          >
+            Delete
+          </LoadingButton>
+          <LoadingButton
+            className="sizeSmall"
+            loading={false}
+            loadingPosition="start"
+            startIcon={<EditIcon />}
+            variant="outlined"
+            onClick={() => {
+              toShowModal(id, name, phone);
+            }}
+          >
+            Edit
+          </LoadingButton>
         </div>
         {isShowModal && <ModalEditor />}
       </li>
-    </div>
+    </ThemeProvider>
   );
 }
 

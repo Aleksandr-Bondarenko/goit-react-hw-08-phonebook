@@ -1,9 +1,15 @@
 .box {
   display: flex;
+  text-align: center;
+  padding-top: 30px;
 }
 
 .leftSide {
-  margin-right: 50px;
+  margin-right: 80px;
+}
+
+.rightSide {
+  text-align: left;
 }
 
 .title {
@@ -20,12 +26,16 @@
 }
 
 .notifyText {
+  display: inline-block;
   margin-top: 20px;
   font-size: 16px;
-  color: #ff0000;
+  box-shadow: 0 0 25px 3px #ff0000a4;
+  border-radius: 10px;
+  padding: 0 5px;
+  color: #ffffff;
 }
 
-/* .ContactsLoader {
+.loader {
   margin: 50px auto;
-  color: #2b2626;
-} */
+  color: #ffffffb0;
+}

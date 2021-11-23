@@ -3,7 +3,10 @@ button {
 }
 
 .App {
-  padding: 20px;
+  /* padding: 20px; */
+  margin: 0 auto;
+  padding: 0px 20px;
+  width: 922px;
 }
 
 .notFoundTitle {

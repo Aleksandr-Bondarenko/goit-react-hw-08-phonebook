@@ -2,17 +2,20 @@ import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
-import Loader from "react-loading";
 import { addContacts } from "../../redux/contacts/contacts-operations";
 import { getItems, getLoading } from "../../redux/contacts/contacts-selectors";
 import s from "./ContactForm.module.css";
+import { LoadingButton } from "@mui/lab";
+import PersonIcon from "@mui/icons-material/Person";
+import PhoneIcon from "@mui/icons-material/Phone";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 function ContactForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
   const isLoading = useSelector(getLoading);
-  // const [isAddBtnLoading, setIsAddBtnLoading] = useState(isLoading);
 
   const nameId = useRef(uuidv4());
   const phoneId = useRef(uuidv4());
@@ -71,6 +74,27 @@ function ContactForm() {
     // setTimeout(() => setIsAddBtnLoading(false), 20000);
   };
 
+  const themeAddBtn = createTheme({
+    components: {
+      MuiLoadingButton: {
+        styleOverrides: {
+          root: {
+            fontFamily: "Signika",
+            fontSize: "16px",
+            textTransform: "capitalize",
+            color: "#000000",
+            borderColor: "#000000",
+            "&:hover": {
+              color: "#ffffffcc",
+              borderColor: "#f0850c",
+              boxShadow: "inset 0 0 10px 1px #ffffffcc",
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
     <form
       className={s.form}
@@ -78,8 +102,10 @@ function ContactForm() {
       name="adding_contacts_form"
     >
       <label className={s.label} htmlFor={nameId.current}>
-        Name
+        <PersonIcon sx={{ color: "action.active" }} />{" "}
+        <span className={s.labelText}>Name</span>
       </label>
+
       <input
         className={s.input}
         type="text"
@@ -90,11 +116,14 @@ function ContactForm() {
         value={name}
         id={nameId.current}
         onChange={handleInputChange}
+        autoComplete="off"
       />
 
       <label className={s.label} htmlFor={phoneId.current}>
-        Number
+        <PhoneIcon sx={{ color: "action.active" }} />{" "}
+        <span className={s.labelText}>Phone number</span>
       </label>
+
       <input
         className={s.input}
         type="tel"
@@ -106,21 +135,21 @@ function ContactForm() {
         value={phone}
         id={phoneId.current}
         onChange={handleInputChange}
+        autoComplete="off"
       />
 
-      <div className={s.box}>
-        <button className={s.btn} type="submit" disabled={isLoading}>
-          Add contact
-        </button>
-        {isLoading && (
-          <Loader
-            className={"s.loader"}
-            type={"spinningBubbles"}
-            color={"#2b2626"}
-            height={25}
-            width={25}
-          />
-        )}
+      <div className={s.btnBox}>
+        <ThemeProvider theme={themeAddBtn}>
+          <LoadingButton
+            loading={isLoading}
+            loadingPosition="end"
+            endIcon={<AddCircleOutlineIcon />}
+            variant="outlined"
+            type="submit"
+          >
+            Add contact
+          </LoadingButton>
+        </ThemeProvider>
       </div>
     </form>
   );
