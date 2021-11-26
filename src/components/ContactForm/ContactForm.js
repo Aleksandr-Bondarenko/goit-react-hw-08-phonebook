@@ -12,66 +12,57 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 function ContactForm() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [contact, setContact] = useState({
+    name: "",
+    number: "",
+  });
 
   const isLoading = useSelector(getLoading);
 
   const nameId = useRef(uuidv4());
-  const phoneId = useRef(uuidv4());
+  const numberId = useRef(uuidv4());
 
   const currentContacts = useSelector(getItems);
 
   const dispatch = useDispatch();
 
-  const handleInputChange = (e) => {
-    switch (e.currentTarget.name) {
-      case "name":
-        setName(e.currentTarget.value);
-        break;
+  const handleInputChange = (e) =>
+    setContact((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
 
-      case "phone":
-        setPhone(e.currentTarget.value);
-        break;
-
-      default:
-        return;
-    }
-  };
-
-  const toAddContact = (name, number) => {
-    const contact = {
-      name,
-      number,
-    };
+  const toAddContact = (contact) => {
     dispatch(addContacts(contact));
   };
 
   const resetForm = () => {
-    setName("");
-    setPhone("");
+    setContact({
+      name: "",
+      number: "",
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setIsAddBtnLoading(!isLoading);
 
-    if (currentContacts.find((contact) => contact.name === name)) {
-      toast.error(`${name} is already in contacts.`);
+    if (currentContacts.find(({ name }) => name === contact.name)) {
+      toast.error(`${contact.name} is already in contacts.`);
       return;
-    } else if (currentContacts.find((contact) => contact.number === phone)) {
-      const doubleContact = currentContacts.filter(
-        (contact) => contact.number === phone
+    } else if (
+      currentContacts.find(({ number }) => number === contact.number)
+    ) {
+      const doubleContact = currentContacts.find(
+        ({ number }) => number === contact.number
       );
       toast.error(
-        `A number ${phone} is assigned to a contact with name ${doubleContact[0].name}.`
+        `A number ${contact.number} is assigned to a contact with name ${doubleContact.name}.`
       );
       return;
     }
 
-    toAddContact(name, phone);
+    toAddContact(contact);
     resetForm();
-    // setTimeout(() => setIsAddBtnLoading(false), 20000);
   };
 
   const themeAddBtn = createTheme({
@@ -113,13 +104,13 @@ function ContactForm() {
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
         required
-        value={name}
+        value={contact.name}
         id={nameId.current}
         onChange={handleInputChange}
         autoComplete="off"
       />
 
-      <label className={s.label} htmlFor={phoneId.current}>
+      <label className={s.label} htmlFor={numberId.current}>
         <PhoneIcon sx={{ color: "action.active" }} />{" "}
         <span className={s.labelText}>Phone number</span>
       </label>
@@ -127,13 +118,13 @@ function ContactForm() {
       <input
         className={s.input}
         type="tel"
-        name="phone"
+        name="number"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
         required
         maxLength="19"
-        value={phone}
-        id={phoneId.current}
+        value={contact.number}
+        id={numberId.current}
         onChange={handleInputChange}
         autoComplete="off"
       />

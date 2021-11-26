@@ -5,9 +5,8 @@ import {
   modalVisible,
   modalEditableData,
 } from "../../redux/contacts/contacts-actions";
-import { getLoading, getIsShow } from "../../redux/contacts/contacts-selectors";
+import { getLoading } from "../../redux/contacts/contacts-selectors";
 import { delContacts } from "../../redux/contacts/contacts-operations";
-import ModalEditor from "../ModalEditor/ModalEditor";
 
 import { LoadingButton } from "@mui/lab";
 import { ThemeProvider } from "@mui/material/styles";
@@ -21,7 +20,6 @@ function ContactItem({ id, name, phone }) {
   const dispatch = useDispatch();
 
   const loading = useSelector(getLoading);
-  const isShowModal = useSelector(getIsShow);
 
   const [isBtnLoader, setIsBtnLoader] = useState(loading);
 
@@ -65,7 +63,6 @@ function ContactItem({ id, name, phone }) {
             Edit
           </LoadingButton>
         </div>
-        {isShowModal && <ModalEditor />}
       </li>
     </ThemeProvider>
   );

@@ -66,8 +66,11 @@ function EditForm() {
           contact.number === editablePhone && contact.id !== editableData.id
       )
     ) {
+      const doubleContact = currentContacts.find(
+        (contact) => contact.number === editablePhone
+      );
       toast.error(
-        `Contact with phone number ${editablePhone} is already in exists! Try another phone number.`
+        `Contact with phone number ${editablePhone} is already in exists with name ${doubleContact.name}! Try another phone number.`
       );
       return;
     }

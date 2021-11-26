@@ -5,7 +5,9 @@ import { Toaster } from "react-hot-toast";
 import AppBar from "./components/AppBar/AppBar";
 import { refreshUser } from "./redux/auth/auth-operations";
 import { getIsLoggedIn, getIsRefresh } from "./redux/auth/auth-selectors";
+import { getIsShow } from "./redux/contacts/contacts-selectors";
 import HomePage from "./pages/HomePage/HomePage";
+import ModalEditor from "./components/ModalEditor/ModalEditor";
 
 import "./App.css";
 
@@ -27,6 +29,7 @@ function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isRefresh = useSelector(getIsRefresh);
+  const isShowModal = useSelector(getIsShow);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -81,6 +84,8 @@ function App() {
             element={<h1 className="notFoundTitle">404 - "Page Not Found" </h1>}
           />
         </Routes>
+
+        {isShowModal && <ModalEditor />}
 
         <Toaster
           position="top-center"
