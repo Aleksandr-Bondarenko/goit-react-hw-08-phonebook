@@ -69,6 +69,10 @@ function UserForm({ url }) {
       return;
     }
 
+    if (password.length < 6) {
+      toast.error("Password must have at least 6 characters!");
+      return;
+    }
     url === "/register" && dispatch(register({ name, email, password }));
     url === "/login" && dispatch(logIn({ email, password }));
 
